@@ -8,6 +8,7 @@ import { cn } from "@/lib/utils";
 import "./globals.css";
 
 import { ThemeProvider } from "@/components/providers/theme-provider";
+import { ModalProvider } from "@/components/providers/modal-provider";
 
 const opensans = Open_Sans({ subsets: ["latin"] });
 
@@ -34,9 +35,10 @@ export default function RootLayout({
           <ThemeProvider
             attribute="class"
             storageKey="shricord-theme-settings"
-            defaultTheme="system"
-            enableSystem
+            defaultTheme="dark"
+            // enableSystem
           >
+            <ModalProvider />
             {children}
           </ThemeProvider>
         </body>

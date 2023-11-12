@@ -19,7 +19,7 @@ const FileUpload = ({ endpoint, value, onChange }: FileUploadProps) => {
         <Image fill src={value} alt="Server Image" className="rounded-full" />
         <button
           onClick={() => onChange("")}
-          className="bg-rose-500 text-white p-1 rounded-full absolute top-0 right-0 shadow-sm"
+          className="absolute right-0 top-0 rounded-full bg-rose-500 p-1 text-white shadow-sm"
           type="button"
         >
           <X className="h-4 w-4" />

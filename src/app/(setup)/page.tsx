@@ -3,7 +3,7 @@ import type { Profile, Server } from "@prisma/client";
 
 import { db } from "@/lib/db";
 import { initialProfile } from "@/lib/initial-profile";
-import CreateServerModal from "@/components/modals/create-server-modal";
+import { InitialCreateServerModal } from "@/components/modals/initial-create-server-modal";
 
 export default async function SetupPage() {
   const profile: Profile = await initialProfile();
@@ -19,5 +19,5 @@ export default async function SetupPage() {
 
   if (server) return redirect(`/servers/${server.id}`);
 
-  return <CreateServerModal />;
+  return <InitialCreateServerModal />;
 }

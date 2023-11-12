@@ -42,7 +42,8 @@
     "tailwindcss-animate": "^1.0.7",
     "uploadthing": "^5.7.4",
     "uuid": "^9.0.1",
-    "zod": "^3.22.4"
+    "zod": "^3.22.4",
+    "zustand": "^4.4.6"
   },
   "devDependencies": {
     "@types/node": "^20",
@@ -53,6 +54,8 @@
     "eslint": "^8",
     "eslint-config-next": "14.0.2",
     "postcss": "^8",
+    "prettier": "^3.0.3",
+    "prettier-plugin-tailwindcss": "^0.5.7",
     "prisma": "^5.5.2",
     "tailwindcss": "^3.3.0",
     "typescript": "^5"

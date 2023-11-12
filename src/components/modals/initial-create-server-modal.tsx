@@ -1,5 +1,7 @@
 "use client";
 
+import { useEffect, useState } from "react";
+
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
@@ -29,15 +31,10 @@ import {
   DialogHeader,
   DialogDescription,
 } from "@/components/ui/Dialog";
-import { useModal } from "@/hooks/use-modal-store";
-import { Server } from "@prisma/client";
-import { useState } from "react";
 
-export const CreateServerModal = () => {
+export const InitialCreateServerModal = () => {
+  const [isMounted, setIsMounted] = useState<boolean>(false);
   const router = useRouter();
-  const { type, isOpen, onClose } = useModal();
-
-  const isModalOpen = isOpen && type === "createServer";
 
   const form = useForm({
     resolver: zodResolver(createServerValidator),
@@ -51,32 +48,29 @@ export const CreateServerModal = () => {
 
   const onSubmit = async (values: TCreateServerValidator) => {
     try {
-      const { data: server }: { data: Server } = await axios.post(
-        "/api/servers",
-        values,
-      );
+      await axios.post("/api/servers", values);
       form.reset();
       router.refresh();
-      onClose();
     } catch (error) {
       console.error(error);
     }
   };
 
-  const handleClose = () => {
-    form.reset();
-    onClose();
-  };
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (!isMounted) return null;
 
   return (
-    <Dialog open={isModalOpen} onOpenChange={handleClose}>
+    <Dialog open>
       <DialogContent className="overflow-hidden bg-white p-0 text-black">
         <DialogHeader className="px-6 pt-8">
           <DialogTitle className="text-center text-2xl font-bold">
-            Create your server!
+            Create your first server!
           </DialogTitle>
           <DialogDescription className="text-center text-zinc-500">
-            Give your new server a name and an icon. You can always change it
+            Give your new server a name, and an icon. You can always change it
             later!
           </DialogDescription>
         </DialogHeader>
