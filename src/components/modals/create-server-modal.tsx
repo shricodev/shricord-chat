@@ -51,10 +51,7 @@ export const CreateServerModal = () => {
 
   const onSubmit = async (values: TCreateServerValidator) => {
     try {
-      const { data: server }: { data: Server } = await axios.post(
-        "/api/servers",
-        values,
-      );
+      await axios.post("/api/servers", values);
       form.reset();
       router.refresh();
       onClose();

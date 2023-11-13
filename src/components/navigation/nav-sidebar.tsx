@@ -1,5 +1,7 @@
-import { redirect } from "next/navigation";
-import { UserButton as UserManagementButton } from "@clerk/nextjs";
+import {
+  UserButton as UserManagementButton,
+  redirectToSignIn,
+} from "@clerk/nextjs";
 
 import { db } from "@/lib/db";
 import { currentProfile } from "@/lib/current-profile";
@@ -9,11 +11,10 @@ import { ScrollArea } from "@/components/ui/ScrollArea";
 import { ThemeToggle } from "@/components/theme-toggle";
 import NavAction from "@/components/navigation/nav-action";
 import { NavItem } from "@/components/navigation/nav-item";
-import { dark } from "@clerk/themes";
 
 const NavSidebar = async () => {
   const profile = await currentProfile();
-  if (!profile) return redirect("/");
+  if (!profile) return redirectToSignIn();
 
   const servers = await db.server.findMany({
     where: {
@@ -26,7 +27,7 @@ const NavSidebar = async () => {
   });
 
   return (
-    <div className="flex h-full w-full flex-col items-center space-y-4 py-3 text-primary dark:bg-[#1e1f22]">
+    <div className="flex h-full w-full flex-col items-center space-y-4 bg-zinc-50 py-3 text-primary dark:bg-[#1e1f22]">
       <NavAction />
       <Separator className="mx-auto h-[2px] w-10 rounded-md bg-zinc-300 dark:bg-zinc-700" />
       <ScrollArea className="w-full flex-1">
