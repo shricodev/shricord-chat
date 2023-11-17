@@ -1,6 +1,6 @@
 import { currentProfile } from "@/lib/current-profile";
 import { db } from "@/lib/db";
-import { editServerValidator } from "@/lib/validators/edit-server";
+import { createEditServerValidator } from "@/lib/validators/create-edit-server";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function PATCH(
@@ -14,22 +14,17 @@ export async function PATCH(
     const serverId = params.serverId;
     const body = await req.json();
 
-    const { imageUrl, serverName } = editServerValidator.parse(body);
-
-    // Filter the data to remove null values as both of them are optional fields.
-    const data = Object.fromEntries(
-      Object.entries({
-        imageUrl,
-        name: serverName,
-      }).filter(([_, value]) => value !== null),
-    );
+    const { imageUrl, serverName } = createEditServerValidator.parse(body);
 
     const server = await db.server.update({
       where: {
         id: serverId,
         profileId: profile.id,
       },
-      data,
+      data: {
+        imageUrl,
+        name: serverName,
+      },
     });
 
     return NextResponse.json(server);

@@ -8,9 +8,9 @@ import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import {
-  TCreateServerValidator,
-  createServerValidator,
-} from "@/lib/validators/create-server";
+  TCreateEditServerValidator,
+  createEditServerValidator,
+} from "@/lib/validators/create-edit-server";
 
 import { Input } from "@/components/ui/Input";
 import { Button } from "@/components/ui/Button";
@@ -37,7 +37,7 @@ export const InitialCreateServerModal = () => {
   const router = useRouter();
 
   const form = useForm({
-    resolver: zodResolver(createServerValidator),
+    resolver: zodResolver(createEditServerValidator),
     defaultValues: {
       serverName: "",
       imageUrl: "",
@@ -46,7 +46,7 @@ export const InitialCreateServerModal = () => {
 
   const isLoading = form.formState.isSubmitting;
 
-  const onSubmit = async (values: TCreateServerValidator) => {
+  const onSubmit = async (values: TCreateEditServerValidator) => {
     try {
       await axios.post("/api/servers", values);
       form.reset();

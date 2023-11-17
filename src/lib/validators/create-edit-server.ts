@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const createServerValidator = z.object({
+export const createEditServerValidator = z.object({
   serverName: z
     .string()
     .min(1, {
@@ -14,4 +14,6 @@ export const createServerValidator = z.object({
   }),
 });
 
-export type TCreateServerValidator = z.infer<typeof createServerValidator>;
+export type TCreateEditServerValidator = z.infer<
+  typeof createEditServerValidator
+>;
