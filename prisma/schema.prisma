@@ -11,8 +11,8 @@ datasource db {
 }
 
 enum Role {
-  MODERATOR
   ADMIN
+  MODERATOR
   GUEST
 }
 

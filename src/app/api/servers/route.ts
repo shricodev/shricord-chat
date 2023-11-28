@@ -5,7 +5,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 import { db } from "@/lib/db";
 import { currentProfile } from "@/lib/current-profile";
-import { createServerValidator } from "@/lib/validators/create-server";
+import { createEditServerValidator } from "@/lib/validators/create-edit-server";
 
 export async function POST(req: NextRequest) {
   try {
@@ -13,7 +13,7 @@ export async function POST(req: NextRequest) {
     if (!profile) return new NextResponse("Unauthorized", { status: 401 });
 
     const body = await req.json();
-    const { imageUrl, serverName } = createServerValidator.parse(body);
+    const { imageUrl, serverName } = createEditServerValidator.parse(body);
 
     const server = await db.server.create({
       data: {
@@ -46,7 +46,7 @@ export async function POST(req: NextRequest) {
     if (error instanceof ZodError) {
       return new NextResponse(
         "Bad Request. There was a problem with your request.",
-        { status: 422 }
+        { status: 422 },
       );
     }
     return new NextResponse("Internal Server Error", { status: 500 });
