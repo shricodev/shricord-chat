@@ -35,7 +35,7 @@ export default function RootLayout({
           <ThemeProvider
             attribute="class"
             storageKey="shricord-theme-settings"
-            defaultTheme="dark"
+            defaultTheme="light"
             enableSystem
           >
             <ModalProvider />
