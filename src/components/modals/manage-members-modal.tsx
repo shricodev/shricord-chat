@@ -43,9 +43,9 @@ import {
 } from "@/components/ui/DropdownMenu";
 
 const roleIconMap = {
-  GUEST: <Shield className="ml-2 h-4 w-4 text-zinc-500" />,
-  MODERATOR: <ShieldCheck className="ml-2 h-4 w-4 text-indigo-500" />,
-  ADMIN: <ShieldAlert className="ml-2 h-4 w-4 text-rose-500" />,
+  [Role.GUEST]: <Shield className="ml-2 h-4 w-4 text-zinc-500" />,
+  [Role.MODERATOR]: <ShieldCheck className="ml-2 h-4 w-4 text-indigo-500" />,
+  [Role.ADMIN]: <ShieldAlert className="ml-2 h-4 w-4 text-rose-500" />,
 };
 
 export const ManageMembersModal = () => {

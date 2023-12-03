@@ -87,7 +87,7 @@ export const CreateChannelModal = () => {
           <DialogDescription className="text-center text-zinc-500">
             Channels are where your team communicates. They&apos;re best when
             organized around a topic —{" "}
-            <code className="rounded-md bg-zinc-100 p-[0.75]">#gaming</code>,
+            <code className="rounded-md bg-zinc-100 p-[0.85]">#gaming</code>,
             for example.
           </DialogDescription>
         </DialogHeader>
