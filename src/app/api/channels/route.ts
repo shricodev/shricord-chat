@@ -18,7 +18,7 @@ export async function POST(req: NextRequest) {
     const body = await req.json();
     const { channelName, channelType } = createChannelValidator.parse(body);
 
-    if (channelName === "general")
+    if (channelName.toLowerCase() === "general")
       return new NextResponse("Channel name cannot be 'general'", {
         status: 400,
       });

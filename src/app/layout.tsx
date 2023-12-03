@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Open_Sans } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
-import { dark } from "@clerk/themes";
 
 import { cn } from "@/lib/utils";
 
@@ -24,11 +23,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <ClerkProvider
-      appearance={{
-        baseTheme: dark,
-      }}
-    >
+    <ClerkProvider>
       {/* suppressHydrationWarning is just for the ThemeProvider. */}
       <html lang="en" suppressHydrationWarning>
         <body className={cn(opensans.className, "bg-white dark:bg-[#313338]")}>
