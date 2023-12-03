@@ -3,7 +3,6 @@
 import { Search } from "lucide-react";
 import { useEffect, useState } from "react";
 import {
-  Command,
   CommandDialog,
   CommandEmpty,
   CommandInput,
