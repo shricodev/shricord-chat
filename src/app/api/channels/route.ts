@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 import { db } from "@/lib/db";
 import { currentProfile } from "@/lib/current-profile";
-import { createChannelValidator } from "@/lib/validators/create-channel";
+import { createEditChannelValidator } from "@/lib/validators/create-edit-channel";
 
 export async function POST(req: NextRequest) {
   try {
@@ -16,7 +16,7 @@ export async function POST(req: NextRequest) {
     if (!serverId) return new NextResponse("Bad Request", { status: 400 });
 
     const body = await req.json();
-    const { channelName, channelType } = createChannelValidator.parse(body);
+    const { channelName, channelType } = createEditChannelValidator.parse(body);
 
     if (channelName.toLowerCase() === "general")
       return new NextResponse("Channel name cannot be 'general'", {

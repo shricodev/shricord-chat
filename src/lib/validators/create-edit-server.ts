@@ -6,8 +6,8 @@ export const createEditServerValidator = z.object({
     .min(1, {
       message: "Server name must be at least 1 character long",
     })
-    .max(30, {
-      message: "Server name must be less than 30 characters long",
+    .max(20, {
+      message: "Server name must be less than 20 characters long",
     }),
   imageUrl: z.string().url().min(1, {
     message: "Server image is required",

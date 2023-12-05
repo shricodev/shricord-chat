@@ -2,7 +2,7 @@
 
 import axios from "axios";
 import { useForm } from "react-hook-form";
-import { useParams, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { Input } from "@/components/ui/Input";
@@ -39,38 +39,43 @@ import { ChannelType } from "@prisma/client";
 import qs from "query-string";
 import { useEffect } from "react";
 
-export const CreateChannelModal = () => {
+export const EditChannelModal = () => {
   const router = useRouter();
-  const params = useParams();
-  const { type, isOpen, onClose, data } = useModal();
+  const {
+    type,
+    isOpen,
+    onClose,
+    data: { channel, server },
+  } = useModal();
 
-  const isModalOpen = isOpen && type === "createChannel";
-  const { channelType } = data;
+  const isModalOpen = isOpen && type === "editChannel";
 
   const form = useForm({
     resolver: zodResolver(createEditChannelValidator),
     defaultValues: {
       channelName: "",
-      channelType: channelType || ChannelType.TEXT,
+      channelType: channel?.type || ChannelType.TEXT,
     },
   });
 
   useEffect(() => {
-    if (channelType) form.setValue("channelType", channelType);
-    else form.setValue("channelType", ChannelType.TEXT);
-  }, [channelType, form]);
+    if (channel) {
+      form.setValue("channelName", channel?.name);
+      form.setValue("channelType", channel?.type);
+    }
+  }, [channel, form]);
 
   const isLoading = form.formState.isSubmitting;
 
   const onSubmit = async (values: TCreateEditChannelValidator) => {
     try {
       const url = qs.stringifyUrl({
-        url: "/api/channels",
+        url: `/api/channels/${channel?.id}`,
         query: {
-          serverId: params?.serverId,
+          serverId: server?.id,
         },
       });
-      await axios.post(url, values);
+      await axios.patch(url, values);
       form.reset();
       router.refresh();
       onClose();
@@ -89,13 +94,13 @@ export const CreateChannelModal = () => {
       <DialogContent className="overflow-hidden bg-white p-0 text-black">
         <DialogHeader className="px-6 pt-8">
           <DialogTitle className="text-center text-2xl font-bold">
-            Create a channel
+            Edit Channel
           </DialogTitle>
           <DialogDescription className="text-center text-zinc-500">
-            Channels are where your team communicates. They&apos;re best when
-            organized around a topic —{" "}
-            <code className="rounded-md bg-zinc-100 p-[0.85]">#gaming</code>,
-            for example.
+            Edit channel{" "}
+            <span className="font-semibold text-indigo-500">
+              &#35;{channel?.name}
+            </span>
           </DialogDescription>
         </DialogHeader>
         <Form {...form}>
@@ -156,7 +161,7 @@ export const CreateChannelModal = () => {
             </div>
             <DialogFooter className="bg-gray-100 px-6 py-4">
               <Button disabled={isLoading} variant="primary">
-                Create
+                Edit
               </Button>
             </DialogFooter>
           </form>

@@ -3,6 +3,7 @@
 import { useState } from "react";
 
 import axios from "axios";
+import qs from "query-string";
 import { useRouter } from "next/navigation";
 
 import { useModal } from "@/hooks/use-modal-store";
@@ -17,20 +18,25 @@ import {
   DialogFooter,
 } from "@/components/ui/Dialog";
 
-export const DeleteServerModal = () => {
+export const DeleteChannelModal = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const { type, isOpen, onClose, data } = useModal();
 
   const router = useRouter();
-  const isModalOpen = isOpen && type === "deleteServer";
+  const isModalOpen = isOpen && type === "deleteChannel";
 
-  const { server } = data;
+  const { channel, server } = data;
 
   const onDelete = async () => {
     try {
       setIsLoading(true);
-      await axios.delete(`/api/servers/${server?.id}/delete`);
-      router.push("/");
+      const url = qs.stringifyUrl({
+        url: `/api/channels/${channel?.id}`,
+        query: {
+          serverId: server?.id,
+        },
+      });
+      await axios.delete(url);
       router.refresh();
       onClose();
     } catch (error) {
@@ -45,16 +51,16 @@ export const DeleteServerModal = () => {
       <DialogContent className="overflow-hidden bg-white p-0 text-black">
         <DialogHeader className="px-6 pt-8">
           <DialogTitle className="text-center text-2xl font-bold">
-            Delete Server
+            Delete Channel
           </DialogTitle>
           <DialogDescription className="text-center text-zinc-500">
-            Are you sure you want to delete{" "}
+            Are you sure you want to delete channel{" "}
             <span className="font-semibold text-indigo-500">
-              {server?.name}
+              &#35;{channel?.name}
             </span>
             ? <br />
             <span className="font-semibold text-rose-500">
-              This server will be permanently deleted.
+              This channel will be permanently deleted.
             </span>
           </DialogDescription>
         </DialogHeader>
