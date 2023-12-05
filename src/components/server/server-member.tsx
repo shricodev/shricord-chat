@@ -4,7 +4,6 @@ import { cn } from "@/lib/utils";
 import { Member, Profile, Role, Server } from "@prisma/client";
 import { Shield, ShieldAlert, ShieldCheck } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
-import { use } from "react";
 import { UserAvatar } from "../user-avatar";
 
 type ServerSearchProps = {
@@ -23,11 +22,17 @@ export const ServerMember = ({ member, server }: ServerSearchProps) => {
   const router = useRouter();
 
   const Icon = RoleIconMap[member.role];
+
+  const onClick = () => {
+    router.push(`/servers/${server.id}/conversations/${member.id}`);
+  };
+
   return (
     <button
+      onClick={onClick}
       className={cn(
         "group mb-1 flex w-full items-center gap-x-2 rounded-md px-2 py-2 transition hover:bg-zinc-700/10 dark:hover:bg-zinc-700/50",
-        params?.memberId === member.id && "bg-zinc-700/20 dark:bg-zinc-700",
+        params?.memberId === member.id && "bg-zinc-700/10 dark:bg-zinc-700",
       )}
     >
       <UserAvatar
