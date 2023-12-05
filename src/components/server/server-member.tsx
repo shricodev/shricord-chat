@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 import { Member, Profile, Role, Server } from "@prisma/client";
 import { Shield, ShieldAlert, ShieldCheck } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
-import { UserAvatar } from "../user-avatar";
+import { UserAvatar } from "@/components/user-avatar";
 
 type ServerSearchProps = {
   member: Member & { profile: Profile };
