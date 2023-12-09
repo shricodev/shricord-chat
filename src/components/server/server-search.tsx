@@ -82,6 +82,7 @@ export const ServerSearch = ({ data }: ServerSearchProps) => {
                 {data?.map(({ id, icon, name }) => {
                   return (
                     <CommandItem
+                      className="mt-1"
                       key={id}
                       onSelect={() => onClick({ id, type })}
                     >

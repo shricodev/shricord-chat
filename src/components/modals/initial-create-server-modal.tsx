@@ -64,7 +64,10 @@ export const InitialCreateServerModal = () => {
 
   return (
     <Dialog open>
-      <DialogContent className="overflow-hidden bg-white p-0 text-black">
+      <DialogContent
+        hideClose
+        className="overflow-hidden bg-white p-0 text-black"
+      >
         <DialogHeader className="px-6 pt-8">
           <DialogTitle className="text-center text-2xl font-bold">
             Create your first server!
