@@ -11,6 +11,7 @@ import { ChatInputValidator, TChatInput } from "@/lib/validators/chat-input";
 import { Input } from "@/components/ui/Input";
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/Form";
 import { useRouter } from "next/navigation";
+import { useModal } from "@/hooks/use-modal-store";
 
 type ChatInputProps = {
   apiUrl: string;
@@ -20,6 +21,7 @@ type ChatInputProps = {
 };
 
 const ChatInput = ({ apiUrl, query, name, chatType }: ChatInputProps) => {
+  const { onOpen } = useModal();
   const form = useForm<TChatInput>({
     defaultValues: {
       content: "",
@@ -57,7 +59,7 @@ const ChatInput = ({ apiUrl, query, name, chatType }: ChatInputProps) => {
                 <div className="relative p-4 pb-6">
                   <button
                     type="button"
-                    onClick={() => {}}
+                    onClick={() => onOpen("messageFile", { apiUrl, query })}
                     className="absolute left-8 top-7 flex h-[24px] w-[24px] items-center justify-center rounded-full bg-zinc-500 p-1 transition hover:bg-zinc-600 dark:bg-zinc-400 dark:hover:bg-zinc-300"
                   >
                     <Plus className="text-white dark:text-[#313338]" />
@@ -71,7 +73,7 @@ const ChatInput = ({ apiUrl, query, name, chatType }: ChatInputProps) => {
                     className="border-0 border-none bg-zinc-200/70 px-14 py-6 text-zinc-600 focus-visible:ring-0 focus-visible:ring-offset-0 dark:bg-zinc-700/75 dark:text-zinc-200"
                   />
                   <div className="absolute right-8 top-7">
-                    <Smile />
+                    <Smile className="cursor-pointer" />
                   </div>
                 </div>
               </FormControl>
