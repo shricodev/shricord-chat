@@ -8,14 +8,20 @@ export const SocketIndicator = () => {
 
   if (!isConnected) {
     return (
-      <Badge variant="outline" className="border-none bg-yellow-600 text-white">
+      <Badge
+        variant="outline"
+        className="select-none border-none bg-yellow-600 text-white"
+      >
         Connecting...
       </Badge>
     );
   }
 
   return (
-    <Badge variant="outline" className="border-none bg-emerald-600 text-white">
+    <Badge
+      variant="outline"
+      className="select-none border-none bg-emerald-600 text-white"
+    >
       <span className="sm:hidden">Connected</span>
       <span className="hidden sm:inline">Live: Connected</span>
     </Badge>

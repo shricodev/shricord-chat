@@ -12,6 +12,7 @@ import { Input } from "@/components/ui/Input";
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/Form";
 import { useRouter } from "next/navigation";
 import { useModal } from "@/hooks/use-modal-store";
+import { EmojiPicker } from "@/components/emoji-picker";
 
 type ChatInputProps = {
   apiUrl: string;
@@ -73,7 +74,11 @@ const ChatInput = ({ apiUrl, query, name, chatType }: ChatInputProps) => {
                     className="border-0 border-none bg-zinc-200/70 px-14 py-6 text-zinc-600 focus-visible:ring-0 focus-visible:ring-offset-0 dark:bg-zinc-700/75 dark:text-zinc-200"
                   />
                   <div className="absolute right-8 top-7">
-                    <Smile className="cursor-pointer" />
+                    <EmojiPicker
+                      onChange={(emoji: string) =>
+                        field.onChange(`${field.value} ${emoji}`)
+                      }
+                    />
                   </div>
                 </div>
               </FormControl>
