@@ -13,7 +13,7 @@ import {
 } from "@/lib/validators/create-edit-server";
 
 import { Input } from "@/components/ui/Input";
-import { Button } from "@/components/ui/Button";
+import { Button, buttonVariants } from "@/components/ui/Button";
 import FileUpload from "@/components/file-upload";
 import {
   FormField,
@@ -31,6 +31,7 @@ import {
   DialogHeader,
   DialogDescription,
 } from "@/components/ui/Dialog";
+import { SignOutButton } from "@clerk/nextjs";
 
 export const InitialCreateServerModal = () => {
   const [isMounted, setIsMounted] = useState<boolean>(false);
@@ -120,9 +121,18 @@ export const InitialCreateServerModal = () => {
               />
             </div>
             <DialogFooter className="bg-gray-100 px-6 py-4">
-              <Button disabled={isLoading} variant="primary">
-                Create
-              </Button>
+              <div className="flex w-full items-center justify-between">
+                <p
+                  className={buttonVariants({
+                    variant: "outline",
+                  })}
+                >
+                  <SignOutButton />
+                </p>
+                <Button disabled={isLoading} variant="primary">
+                  Create
+                </Button>
+              </div>
             </DialogFooter>
           </form>
         </Form>

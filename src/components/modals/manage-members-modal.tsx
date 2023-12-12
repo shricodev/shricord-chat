@@ -19,7 +19,7 @@ import {
 
 import { useModal } from "@/hooks/use-modal-store";
 
-import { ServerWithMembersWithProfile } from "@/types/server-members-profile";
+import { TServerWithMembersWithProfile } from "@/types/server-members-profile";
 
 import { UserAvatar } from "@/components/user-avatar";
 import { ScrollArea } from "@/components/ui/ScrollArea";
@@ -57,7 +57,7 @@ export const ManageMembersModal = () => {
   const isModalOpen = isOpen && type === "members";
 
   const { server } = data as {
-    server: ServerWithMembersWithProfile;
+    server: TServerWithMembersWithProfile;
   };
 
   const onRoleChange = async (memberId: string, role: Role) => {
