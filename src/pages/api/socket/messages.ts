@@ -21,8 +21,6 @@ export default async function handler(
     });
   }
 
-  console.log("I am inside messages......");
-
   try {
     const profile = await currentProfilePages(req);
     if (!profile)

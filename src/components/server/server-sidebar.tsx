@@ -19,17 +19,12 @@ import { Separator } from "@/components/ui/Separator";
 import { ServerSection } from "@/components/server/server-section";
 import { ServerChannel } from "@/components/server/server-channel";
 import { ServerMember } from "@/components/server/server-member";
+import { roleIconMapLeft } from "@/constants";
 
 const IconMap = {
   [ChannelType.AUDIO]: <Mic className="mr-2 h-4 w-4" />,
   [ChannelType.VIDEO]: <Video className="mr-2 h-4 w-4" />,
   [ChannelType.TEXT]: <Hash className="mr-2 h-4 w-4" />,
-};
-
-const RoleIconMap = {
-  [Role.GUEST]: <Shield className="mr-2 h-4 w-4 text-zinc-500" />,
-  [Role.MODERATOR]: <ShieldCheck className="mr-2 h-4 w-4 text-indigo-500" />,
-  [Role.ADMIN]: <ShieldAlert className="mr-2 h-4 w-4 text-rose-500" />,
 };
 
 export const ServerSidebar = async ({ serverId }: { serverId: string }) => {
@@ -118,7 +113,7 @@ export const ServerSidebar = async ({ serverId }: { serverId: string }) => {
       data: members?.map((member) => ({
         id: member.id,
         name: member.profile.name,
-        icon: RoleIconMap[member.role],
+        icon: roleIconMapLeft[member.role],
       })),
     },
   ];

@@ -41,12 +41,7 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
 } from "@/components/ui/DropdownMenu";
-
-const roleIconMap = {
-  [Role.GUEST]: <Shield className="ml-2 h-4 w-4 text-zinc-500" />,
-  [Role.MODERATOR]: <ShieldCheck className="ml-2 h-4 w-4 text-indigo-500" />,
-  [Role.ADMIN]: <ShieldAlert className="ml-2 h-4 w-4 text-rose-500" />,
-};
+import { roleIconMapRight } from "@/constants";
 
 export const ManageMembersModal = () => {
   const [loadingId, setLoadingId] = useState<string>("");
@@ -121,7 +116,7 @@ export const ManageMembersModal = () => {
               <div className="flex flex-col gap-y-1">
                 <div className="flex items-center text-xs font-semibold">
                   {member.profile.name}
-                  {roleIconMap[member.role]}
+                  {roleIconMapRight[member.role]}
                 </div>
                 <p className="text-xs text-zinc-500">{member.profile.email}</p>
               </div>

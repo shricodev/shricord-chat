@@ -1,8 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { Member, Profile, Role, Server } from "@prisma/client";
-import { Shield, ShieldAlert, ShieldCheck } from "lucide-react";
+import { Member, Profile, Server } from "@prisma/client";
 import { useParams, useRouter } from "next/navigation";
 import { UserAvatar } from "@/components/user-avatar";
 
@@ -11,17 +10,9 @@ type ServerSearchProps = {
   server: Server;
 };
 
-const RoleIconMap = {
-  [Role.GUEST]: <Shield className="ml-2 h-4 w-4 text-zinc-500" />,
-  [Role.MODERATOR]: <ShieldCheck className="ml-2 h-4 w-4 text-indigo-500" />,
-  [Role.ADMIN]: <ShieldAlert className="ml-2 h-4 w-4 text-rose-500" />,
-};
-
 export const ServerMember = ({ member, server }: ServerSearchProps) => {
   const params = useParams();
   const router = useRouter();
-
-  const Icon = RoleIconMap[member.role];
 
   const onClick = () => {
     router.push(`/servers/${server.id}/conversations/${member.id}`);
