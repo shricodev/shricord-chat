@@ -6,8 +6,17 @@ import { ActionTooltip } from "@/components/action-tooltip";
 import { roleIconMapRight } from "@/constants";
 import { Edit, File, Trash } from "lucide-react";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
+import qs from "query-string";
+import axios from "axios";
+import { useForm } from "react-hook-form";
+import { ChatInputValidator, TChatInput } from "@/lib/validators/chat-input";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Input } from "@/components/ui/Input";
+import { Button } from "@/components/ui/Button";
+import { Form, FormControl, FormField, FormItem } from "../ui/Form";
+import { useModal } from "@/hooks/use-modal-store";
 
 type ChatItemProps = {
   id: string;
@@ -40,6 +49,8 @@ export const ChatItem = ({
   const [isDeleting, setIsDeleting] = useState<boolean>(false);
   const fileType = fileUrl?.split(".").pop();
 
+  const { onOpen } = useModal();
+
   const isAdmin = currentMember.role === Role.ADMIN;
   const isModerator = currentMember.role === Role.MODERATOR;
   const isOwner = currentMember.id === member.id;
@@ -47,6 +58,48 @@ export const ChatItem = ({
   const canEditMessage = !deleted && isOwner && !fileUrl;
   const isPDF = fileType === "pdf" && fileUrl;
   const isImage = !isPDF && fileUrl;
+
+  const form = useForm<TChatInput>({
+    resolver: zodResolver(ChatInputValidator),
+    defaultValues: {
+      content,
+    },
+  });
+
+  const isLoading = form.formState.isSubmitting;
+
+  useEffect(() => {
+    form.reset({
+      content,
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [content]);
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setIsEditing(false);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
+
+  const onSubmit = async (values: TChatInput) => {
+    try {
+      const url = qs.stringifyUrl({
+        url: `${socketUrl}/${id}`,
+        query: socketQuery,
+      });
+
+      await axios.patch(url, values);
+      form.reset();
+      setIsEditing(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div className="group relative flex w-full items-center p-4 transition hover:bg-black/5">
@@ -112,6 +165,39 @@ export const ChatItem = ({
               ) : null}
             </p>
           ) : null}
+          {!fileUrl && isEditing ? (
+            <Form {...form}>
+              <form
+                onSubmit={form.handleSubmit(onSubmit)}
+                className="flex w-full items-center gap-x-2 pt-2"
+              >
+                <FormField
+                  control={form.control}
+                  name="content"
+                  render={({ field }) => (
+                    <FormItem className="flex-1">
+                      <FormControl>
+                        <div className="relative w-full">
+                          <Input
+                            placeholder="Edited Message..."
+                            disabled={isLoading}
+                            {...field}
+                            className="border-0 border-none bg-zinc-200/90 p-2 text-zinc-600 focus-visible:ring-0 focus-visible:ring-offset-0 dark:bg-zinc-700/75 dark:text-zinc-200"
+                          />
+                        </div>
+                      </FormControl>
+                    </FormItem>
+                  )}
+                />
+                <Button size="sm" variant="primary" disabled={isLoading}>
+                  Save
+                </Button>
+              </form>
+              <span className="mt-1 text-[12px] text-zinc-400">
+                Press Esc to cancel, Enter to save
+              </span>
+            </Form>
+          ) : null}
         </div>
       </div>
       {canDeleteMessage ? (
@@ -125,7 +211,10 @@ export const ChatItem = ({
             </ActionTooltip>
           ) : null}
           <ActionTooltip label="Delete">
-            <Trash className="ml-auto h-4 w-4 cursor-pointer text-zinc-500 transition hover:text-zinc-600 dark:hover:text-zinc-300" />
+            <Trash
+              onClick={() => onOpen("deleteMessage")}
+              className="ml-auto h-4 w-4 cursor-pointer text-zinc-500 transition hover:text-zinc-600 dark:hover:text-zinc-300"
+            />
           </ActionTooltip>
         </div>
       ) : null}
