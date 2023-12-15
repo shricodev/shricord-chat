@@ -1,14 +1,6 @@
 "use client";
 
-import { TServerWithMembersWithProfile } from "@/types/server-members-profile";
 import { Role } from "@prisma/client";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/DropdownMenu";
 import {
   ChevronDown,
   LogOut,
@@ -18,7 +10,18 @@ import {
   UserPlus,
   Users2,
 } from "lucide-react";
+
 import { useModal } from "@/hooks/use-modal-store";
+
+import { TServerWithMembersWithProfile } from "@/types/server-members-profile";
+
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/DropdownMenu";
 
 type ServerHeaderProps = {
   server: TServerWithMembersWithProfile;

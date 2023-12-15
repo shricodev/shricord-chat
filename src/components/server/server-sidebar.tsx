@@ -1,27 +1,21 @@
 import { redirect } from "next/navigation";
-import { ChannelType, Role } from "@prisma/client";
-import {
-  Hash,
-  Mic,
-  Shield,
-  ShieldAlert,
-  ShieldCheck,
-  Video,
-} from "lucide-react";
+import { ChannelType } from "@prisma/client";
+import { Hash, Mic, Video } from "lucide-react";
+
+import { roleIconMapLeft } from "@/constants";
 
 import { db } from "@/lib/db";
 import { currentProfile } from "@/lib/current-profile";
 
+import { Separator } from "@/components/ui/Separator";
 import { ScrollArea } from "@/components/ui/ScrollArea";
 import { ServerHeader } from "@/components/server/server-header";
 import { ServerSearch } from "@/components/server/server-search";
-import { Separator } from "@/components/ui/Separator";
+import { ServerMember } from "@/components/server/server-member";
 import { ServerSection } from "@/components/server/server-section";
 import { ServerChannel } from "@/components/server/server-channel";
-import { ServerMember } from "@/components/server/server-member";
-import { roleIconMapLeft } from "@/constants";
 
-const IconMap = {
+const iconMap = {
   [ChannelType.AUDIO]: <Mic className="mr-2 h-4 w-4" />,
   [ChannelType.VIDEO]: <Video className="mr-2 h-4 w-4" />,
   [ChannelType.TEXT]: <Hash className="mr-2 h-4 w-4" />,
@@ -86,7 +80,7 @@ export const ServerSidebar = async ({ serverId }: { serverId: string }) => {
       data: textChannels?.map((channel) => ({
         id: channel.id,
         name: channel.name,
-        icon: IconMap[channel.type],
+        icon: iconMap[channel.type],
       })),
     },
     {
@@ -95,7 +89,7 @@ export const ServerSidebar = async ({ serverId }: { serverId: string }) => {
       data: audioChannels?.map((channel) => ({
         id: channel.id,
         name: channel.name,
-        icon: IconMap[channel.type],
+        icon: iconMap[channel.type],
       })),
     },
     {
@@ -104,7 +98,7 @@ export const ServerSidebar = async ({ serverId }: { serverId: string }) => {
       data: videoChannels?.map((channel) => ({
         id: channel.id,
         name: channel.name,
-        icon: IconMap[channel.type],
+        icon: iconMap[channel.type],
       })),
     },
     {

@@ -1,7 +1,8 @@
-import { currentProfile } from "@/lib/current-profile";
-import { db } from "@/lib/db";
-import { createEditServerValidator } from "@/lib/validators/create-edit-server";
 import { NextRequest, NextResponse } from "next/server";
+
+import { db } from "@/lib/db";
+import { currentProfile } from "@/lib/current-profile";
+import { createEditServerValidator } from "@/lib/validators/create-edit-server";
 
 export async function PATCH(
   req: NextRequest,

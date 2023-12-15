@@ -1,10 +1,13 @@
 "use client";
 
-import { TServerWithMembersWithProfile } from "@/types/server-members-profile";
-import { ChannelType, Role } from "@prisma/client";
-import { ActionTooltip } from "@/components/action-tooltip";
 import { Plus, Settings } from "lucide-react";
+import { ChannelType, Role } from "@prisma/client";
+
 import { useModal } from "@/hooks/use-modal-store";
+
+import { TServerWithMembersWithProfile } from "@/types/server-members-profile";
+
+import { ActionTooltip } from "@/components/action-tooltip";
 
 type ServerSectionProps = {
   role?: Role;

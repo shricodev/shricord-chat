@@ -17,6 +17,8 @@ import {
   UserX2,
 } from "lucide-react";
 
+import { roleIconMapRight } from "@/constants";
+
 import { useModal } from "@/hooks/use-modal-store";
 
 import { TServerWithMembersWithProfile } from "@/types/server-members-profile";
@@ -41,7 +43,6 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
 } from "@/components/ui/DropdownMenu";
-import { roleIconMapRight } from "@/constants";
 
 export const ManageMembersModal = () => {
   const [loadingId, setLoadingId] = useState<string>("");

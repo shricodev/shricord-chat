@@ -1,14 +1,19 @@
 "use client";
 
-import { Member, Message } from "@prisma/client";
-import { ChatWelcome } from "@/components/chat/chat-welcome";
-import { useChatQuery } from "@/hooks/use-chat-query";
-import { Loader2, ServerCrash } from "lucide-react";
 import { Fragment } from "react";
-import { TMessageWithMemberWithProfile } from "@/types/message-member-profile";
-import { ChatItem } from "./chat-item";
+
 import { format } from "date-fns";
+import { Member } from "@prisma/client";
+import { Loader2, ServerCrash } from "lucide-react";
+
 import { MESSAGE_DATE_FORMAT } from "@/config";
+
+import { useChatQuery } from "@/hooks/use-chat-query";
+
+import { TMessageWithMemberWithProfile } from "@/types/message-member-profile";
+
+import { ChatItem } from "@/components/chat/chat-item";
+import { ChatWelcome } from "@/components/chat/chat-welcome";
 
 type ChatMessagesProps = {
   name: string;

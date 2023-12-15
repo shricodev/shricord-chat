@@ -1,11 +1,18 @@
 "use client";
 
 import axios from "axios";
+import qs from "query-string";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import qs from "query-string";
+import { useModal } from "@/hooks/use-modal-store";
+
+import {
+  TMessageFile,
+  messageFileValidator,
+} from "@/lib/validators/message-file";
+
 import { Button } from "@/components/ui/Button";
 import FileUpload from "@/components/file-upload";
 import {
@@ -23,11 +30,6 @@ import {
   DialogHeader,
   DialogDescription,
 } from "@/components/ui/Dialog";
-import { useModal } from "@/hooks/use-modal-store";
-import {
-  TMessageFile,
-  messageFileValidator,
-} from "@/lib/validators/message-file";
 
 export const MessageFileModal = () => {
   const { isOpen, type, data, onClose } = useModal();

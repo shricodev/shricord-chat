@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
+import { SignOutButton } from "@clerk/nextjs";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import {
@@ -13,8 +14,8 @@ import {
 } from "@/lib/validators/create-edit-server";
 
 import { Input } from "@/components/ui/Input";
-import { Button, buttonVariants } from "@/components/ui/Button";
 import FileUpload from "@/components/file-upload";
+import { Button, buttonVariants } from "@/components/ui/Button";
 import {
   FormField,
   FormControl,
@@ -31,7 +32,6 @@ import {
   DialogHeader,
   DialogDescription,
 } from "@/components/ui/Dialog";
-import { SignOutButton } from "@clerk/nextjs";
 
 export const InitialCreateServerModal = () => {
   const [isMounted, setIsMounted] = useState<boolean>(false);

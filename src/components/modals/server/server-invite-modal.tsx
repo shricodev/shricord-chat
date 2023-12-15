@@ -1,5 +1,16 @@
 "use client";
 
+import { useState } from "react";
+
+import axios from "axios";
+import { CheckCircle, Copy, RefreshCw } from "lucide-react";
+
+import { useOrigin } from "@/hooks/use-origin";
+import { useModal } from "@/hooks/use-modal-store";
+
+import { Label } from "@/components/ui/Label";
+import { Input } from "@/components/ui/Input";
+import { Button } from "@/components/ui/Button";
 import {
   Dialog,
   DialogContent,
@@ -7,14 +18,6 @@ import {
   DialogHeader,
   DialogDescription,
 } from "@/components/ui/Dialog";
-import { useModal } from "@/hooks/use-modal-store";
-import { Label } from "@/components/ui/Label";
-import { Input } from "@/components/ui/Input";
-import { Button } from "@/components/ui/Button";
-import { CheckCircle, Copy, RefreshCw } from "lucide-react";
-import { useOrigin } from "@/hooks/use-origin";
-import { useState } from "react";
-import axios from "axios";
 
 export const ServerInviteModal = () => {
   const [copied, setCopied] = useState<boolean>(false);

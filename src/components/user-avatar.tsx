@@ -1,7 +1,8 @@
 "use client";
 
-import { Avatar, AvatarImage } from "@/components/ui/Avatar";
 import { cn } from "@/lib/utils";
+
+import { Avatar, AvatarImage } from "@/components/ui/Avatar";
 
 type UserAvatarProps = {
   classname?: string;

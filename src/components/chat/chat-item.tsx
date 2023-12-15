@@ -1,22 +1,27 @@
 "use client";
 
-import { Member, Profile, Role } from "@prisma/client";
-import { UserAvatar } from "@/components/user-avatar";
-import { ActionTooltip } from "@/components/action-tooltip";
-import { roleIconMapRight } from "@/constants";
-import { Edit, File, Trash } from "lucide-react";
-import Image from "next/image";
 import { useEffect, useState } from "react";
-import { cn } from "@/lib/utils";
-import qs from "query-string";
+
 import axios from "axios";
+import qs from "query-string";
+import Image from "next/image";
 import { useForm } from "react-hook-form";
-import { ChatInputValidator, TChatInput } from "@/lib/validators/chat-input";
+import { Edit, File, Trash } from "lucide-react";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Member, Profile, Role } from "@prisma/client";
+
+import { roleIconMapRight } from "@/constants";
+
+import { useModal } from "@/hooks/use-modal-store";
+
+import { cn } from "@/lib/utils";
+import { ChatInputValidator, TChatInput } from "@/lib/validators/chat-input";
+
 import { Input } from "@/components/ui/Input";
 import { Button } from "@/components/ui/Button";
-import { Form, FormControl, FormField, FormItem } from "../ui/Form";
-import { useModal } from "@/hooks/use-modal-store";
+import { UserAvatar } from "@/components/user-avatar";
+import { ActionTooltip } from "@/components/action-tooltip";
+import { Form, FormControl, FormField, FormItem } from "@/components/ui/Form";
 
 type ChatItemProps = {
   id: string;

@@ -1,10 +1,10 @@
+import { ZodError } from "zod";
 import { Role } from "@prisma/client";
 import { NextRequest, NextResponse } from "next/server";
 
 import { db } from "@/lib/db";
 import { currentProfile } from "@/lib/current-profile";
 import { createEditChannelValidator } from "@/lib/validators/create-edit-channel";
-import { ZodError } from "zod";
 
 export async function DELETE(
   req: NextRequest,

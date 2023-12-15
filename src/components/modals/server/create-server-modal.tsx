@@ -5,6 +5,8 @@ import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 
+import { useModal } from "@/hooks/use-modal-store";
+
 import {
   TCreateEditServerValidator,
   createEditServerValidator,
@@ -29,9 +31,6 @@ import {
   DialogHeader,
   DialogDescription,
 } from "@/components/ui/Dialog";
-import { useModal } from "@/hooks/use-modal-store";
-import { Server } from "@prisma/client";
-import { useState } from "react";
 
 export const CreateServerModal = () => {
   const router = useRouter();

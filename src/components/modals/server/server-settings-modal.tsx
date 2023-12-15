@@ -1,9 +1,13 @@
 "use client";
 
+import { useEffect } from "react";
+
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
+
+import { useModal } from "@/hooks/use-modal-store";
 
 import {
   TCreateEditServerValidator,
@@ -29,8 +33,6 @@ import {
   DialogHeader,
   DialogDescription,
 } from "@/components/ui/Dialog";
-import { useModal } from "@/hooks/use-modal-store";
-import { useEffect } from "react";
 
 export const ServerSettingsModal = () => {
   const router = useRouter();

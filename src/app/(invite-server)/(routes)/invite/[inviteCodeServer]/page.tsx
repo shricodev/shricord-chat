@@ -1,4 +1,3 @@
-import Error from "next/error";
 import { Role } from "@prisma/client";
 import { redirect } from "next/navigation";
 import { redirectToSignIn } from "@clerk/nextjs";

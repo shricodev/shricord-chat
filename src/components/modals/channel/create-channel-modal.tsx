@@ -1,12 +1,30 @@
 "use client";
 
+import { useEffect } from "react";
+
 import axios from "axios";
+import qs from "query-string";
 import { useForm } from "react-hook-form";
-import { useParams, useRouter } from "next/navigation";
+import { ChannelType } from "@prisma/client";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useParams, useRouter } from "next/navigation";
+
+import { useModal } from "@/hooks/use-modal-store";
+
+import {
+  TCreateEditChannelValidator,
+  createEditChannelValidator,
+} from "@/lib/validators/create-edit-channel";
 
 import { Input } from "@/components/ui/Input";
 import { Button } from "@/components/ui/Button";
+import {
+  SelectContent,
+  Select,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/Select";
 import {
   FormField,
   FormControl,
@@ -23,21 +41,6 @@ import {
   DialogHeader,
   DialogDescription,
 } from "@/components/ui/Dialog";
-import { useModal } from "@/hooks/use-modal-store";
-import {
-  TCreateEditChannelValidator,
-  createEditChannelValidator,
-} from "@/lib/validators/create-edit-channel";
-import {
-  SelectContent,
-  Select,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/Select";
-import { ChannelType } from "@prisma/client";
-import qs from "query-string";
-import { useEffect } from "react";
 
 export const CreateChannelModal = () => {
   const router = useRouter();

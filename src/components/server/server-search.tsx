@@ -1,7 +1,11 @@
 "use client";
 
-import { Search } from "lucide-react";
 import { useEffect, useState } from "react";
+
+import { CommandGroup } from "cmdk";
+import { Search } from "lucide-react";
+import { useParams, useRouter } from "next/navigation";
+
 import {
   CommandDialog,
   CommandEmpty,
@@ -9,8 +13,6 @@ import {
   CommandItem,
   CommandList,
 } from "@/components/ui/Command";
-import { CommandGroup } from "cmdk";
-import { useParams, useRouter } from "next/navigation";
 
 type ServerSearchProps = {
   data: {

@@ -1,13 +1,15 @@
 "use client";
 
+import { HTMLAttributes } from "react";
+
+import { cn } from "@/lib/utils";
+
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/Tooltip";
-import { cn } from "@/lib/utils";
-import { HTMLAttributes } from "react";
 
 type ActionTooltipProps = {
   children: React.ReactNode;

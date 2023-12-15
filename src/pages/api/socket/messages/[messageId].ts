@@ -1,9 +1,11 @@
-import { currentProfilePages } from "@/lib/current-profile-pages";
-import { db } from "@/lib/db";
-import { ChatInputValidator } from "@/lib/validators/chat-input";
-import { TNextApiResponseServerIO } from "@/types/nextapi-response-server-io";
 import { Role } from "@prisma/client";
 import { NextApiRequest } from "next";
+
+import { db } from "@/lib/db";
+import { ChatInputValidator } from "@/lib/validators/chat-input";
+import { currentProfilePages } from "@/lib/current-profile-pages";
+
+import { TNextApiResponseServerIO } from "@/types/nextapi-response-server-io";
 
 type TRequestQuery = {
   messageId: string;

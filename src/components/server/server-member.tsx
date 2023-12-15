@@ -1,8 +1,10 @@
 "use client";
 
-import { cn } from "@/lib/utils";
-import { Member, Profile, Server } from "@prisma/client";
 import { useParams, useRouter } from "next/navigation";
+import { Member, Profile, Server } from "@prisma/client";
+
+import { cn } from "@/lib/utils";
+
 import { UserAvatar } from "@/components/user-avatar";
 
 type ServerSearchProps = {

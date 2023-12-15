@@ -1,8 +1,9 @@
 "use client";
 
-import { UploadDropzone } from "@/lib/uploadthing";
-import { File, X } from "lucide-react";
 import Image from "next/image";
+import { File, X } from "lucide-react";
+
+import { UploadDropzone } from "@/lib/uploadthing";
 
 type FileUploadProps = {
   endpoint: "serverImage" | "messageFile";

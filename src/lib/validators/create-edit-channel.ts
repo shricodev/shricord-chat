@@ -1,5 +1,5 @@
-import { ChannelType } from "@prisma/client";
 import { z } from "zod";
+import { ChannelType } from "@prisma/client";
 
 export const createEditChannelValidator = z.object({
   channelName: z
