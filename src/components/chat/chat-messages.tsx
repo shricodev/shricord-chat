@@ -14,6 +14,7 @@ import { TMessageWithMemberWithProfile } from "@/types/message-member-profile";
 
 import { ChatItem } from "@/components/chat/chat-item";
 import { ChatWelcome } from "@/components/chat/chat-welcome";
+import { useChatSocket } from "@/hooks/use-chat-socket";
 
 type ChatMessagesProps = {
   name: string;
@@ -46,6 +47,15 @@ export const ChatMessages = ({
       paramKey,
       paramValue,
     });
+
+  const addKey = `chat:${chatId}:messages`;
+  const updateKey = `chat:${chatId}:messages:update`;
+
+  useChatSocket({
+    queryKey,
+    addKey,
+    updateKey,
+  });
 
   if (status === "loading") {
     return (

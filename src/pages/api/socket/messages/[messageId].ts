@@ -31,7 +31,6 @@ export default async function handler(
       });
 
     const { messageId, serverId, channelId } = req.query as TRequestQuery;
-    const { content } = ChatInputValidator.parse(req.body);
 
     if (!channelId || !serverId || !messageId)
       return res.status(400).json({
@@ -134,12 +133,14 @@ export default async function handler(
         });
       }
 
+      const { content } = ChatInputValidator.parse(req.body);
+
       message = await db.message.update({
         where: {
           id: messageId,
         },
         data: {
-          content,
+          content: content as string,
         },
         include: {
           member: {
@@ -157,6 +158,6 @@ export default async function handler(
     return res.status(200).json(message);
   } catch (error) {
     console.log("[MESSAGE_ID]", error);
-    return res.status(500).json({ error: "Internal Error" });
+    return res.status(500).json({ error: error });
   }
 }
