@@ -1,4 +1,4 @@
-import { Message } from "@prisma/client";
+import { DirectMessage } from "@prisma/client";
 import { NextRequest, NextResponse } from "next/server";
 
 import { INFINITE_SCROLLING_MESSAGES_BATCH } from "@/config";
@@ -14,20 +14,21 @@ export async function GET(req: NextRequest) {
     const { searchParams } = new URL(req.nextUrl);
 
     const cursor = searchParams.get("cursor");
-    const channelId = searchParams.get("channelId");
+    const conversationId = searchParams.get("conversationId");
 
-    if (!channelId) return new NextResponse("Bad request", { status: 400 });
+    if (!conversationId)
+      return new NextResponse("Bad request", { status: 400 });
 
-    let messages: Message[] = [];
+    let messages: DirectMessage[] = [];
     if (cursor) {
-      messages = await db.message.findMany({
+      messages = await db.directMessage.findMany({
         take: INFINITE_SCROLLING_MESSAGES_BATCH,
         skip: 1,
         cursor: {
           id: cursor,
         },
         where: {
-          channelId,
+          conversationId,
         },
         include: {
           member: {
@@ -41,10 +42,10 @@ export async function GET(req: NextRequest) {
         },
       });
     } else {
-      messages = await db.message.findMany({
+      messages = await db.directMessage.findMany({
         take: INFINITE_SCROLLING_MESSAGES_BATCH,
         where: {
-          channelId,
+          conversationId,
         },
         include: {
           member: {
@@ -68,7 +69,7 @@ export async function GET(req: NextRequest) {
       nextCursor,
     });
   } catch (error) {
-    console.error("[MESSAGES_GET]", error);
+    console.error("[DIRECT_MESSAGES_GET]", error);
     return new NextResponse("Internal server error", { status: 500 });
   }
 }

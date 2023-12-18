@@ -72,7 +72,7 @@ const ChatInput = ({ apiUrl, query, name, chatType }: ChatInputProps) => {
                       chatType === "conversation" ? name : "channel " + name
                     }`}
                     {...field}
-                    className="border-0 border-none bg-zinc-200/70 px-14 py-6 text-zinc-600 focus-visible:ring-0 focus-visible:ring-offset-0 dark:bg-zinc-700/75 dark:text-zinc-200"
+                    className="border-0 border-none bg-zinc-200/90 px-14 py-6 text-zinc-600 focus-visible:ring-0 focus-visible:ring-offset-0 dark:bg-zinc-700/75 dark:text-zinc-200"
                   />
                   <div className="absolute right-8 top-7">
                     <EmojiPicker
