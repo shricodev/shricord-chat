@@ -90,8 +90,8 @@ dependencies:
     specifier: ^1.13.0
     version: 1.13.0
   livekit-server-sdk:
-    specifier: ^1.2.6
-    version: 1.2.6
+    specifier: ^1.2.7
+    version: 1.2.7
   lucide-react:
     specifier: ^0.292.0
     version: 0.292.0(react@18.2.0)
@@ -3520,8 +3520,8 @@ packages:
       webrtc-adapter: 8.2.3
     dev: false
 
-  /livekit-server-sdk@1.2.6:
-    resolution: {integrity: sha512-Oc3lArzsyS3zzjQcTMqb3mnzHXTch0g8p4GqOcuaDaeo7J7vbf0soFUd94vURgqBq5h7wOTOOi7DlC2S0nj6LA==}
+  /livekit-server-sdk@1.2.7:
+    resolution: {integrity: sha512-tOhRb0vz1wBzMpTkP4ixptlC9MFME24PvG8Z/R7vBbQ1VGd6EdNr56voBSr+RCalYxaQqx0E9Gg4l+57m/Nlmw==}
     dependencies:
       axios: 1.6.1
       camelcase-keys: 7.0.2
