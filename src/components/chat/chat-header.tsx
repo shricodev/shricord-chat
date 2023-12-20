@@ -4,6 +4,7 @@ import { Hash, Mic, Video } from "lucide-react";
 import { UserAvatar } from "@/components/user-avatar";
 import { MobileToggle } from "@/components/mobile-toggle";
 import { SocketIndicator } from "@/components/socket-indicator";
+import { ChatVideoButton } from "@/components/chat/chat-video-button";
 
 type ChatHeaderProps = {
   serverId: string;
@@ -21,7 +22,7 @@ export const ChatHeader = ({
   channelType,
 }: ChatHeaderProps) => {
   return (
-    <div className="text-md flex h-12 items-center border-b-2 border-neutral-200 px-3 font-semibold dark:border-neutral-800">
+    <div className="text-md flex h-12 shrink-0 items-center border-b-2 border-neutral-200 px-3 font-semibold dark:border-neutral-800">
       <MobileToggle serverId={serverId} />
       {type === "channel" && channelType === "TEXT" ? (
         <Hash className="mr-2 h-5 w-5 text-zinc-500 dark:text-zinc-400" />
@@ -40,6 +41,7 @@ export const ChatHeader = ({
       )}
       <p className="text-md font-semibold text-black dark:text-white">{name}</p>
       <div className="ml-auto flex items-center">
+        {type === "conversation" && <ChatVideoButton />}
         <SocketIndicator />
       </div>
     </div>

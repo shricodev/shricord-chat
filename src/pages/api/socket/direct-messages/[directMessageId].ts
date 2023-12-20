@@ -142,7 +142,7 @@ export default async function handler(
           id: directMessageId,
         },
         data: {
-          content: content as string,
+          content: content,
         },
         include: {
           member: {
